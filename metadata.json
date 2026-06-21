@@ -1,0 +1,6 @@
+{
+  "name": "MY Prop Agent - KL Luxury Property Specialist",
+  "description": "Professional real estate personal website for Malaysia property market, focusing on KL luxury property and investment-grade projects by EXSIM.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
