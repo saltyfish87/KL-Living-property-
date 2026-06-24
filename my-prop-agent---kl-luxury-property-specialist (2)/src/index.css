@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Instagram Web UI Palette colors mapped cleanly to override standard classes */
+  --color-muji-white: #FAFAFA; /* Instagram feed background */
+  --color-muji-beige: #FFFFFF; /* Instagram card / nav bar background */
+  --color-muji-sand: #1d4ed8;  /* Web Interactive / Royal Dark Blue */
+  --color-muji-oak: #E1306C;   /* Instagram brand Magenta */
+  --color-muji-text: #000000;  /* Pure dark black text */
+  --color-muji-text-muted: #333333; /* Darker muted caption text */
+  --color-muji-border: #DBDBDB; /* Instagram clean line border */
+  --color-muji-accent: #C13584; /* Instagram secondary brand purple */
+
+  /* Override serif layout references to modern sans for a unified geometric sans brand output */
+  --font-serif: "Plus Jakarta Sans", "Inter", sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Inter", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-muji-white);
+    color: var(--color-muji-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--color-muji-white);
+    color: var(--color-muji-text);
+    @apply font-medium; /* Restores elegant standard body weight for modern social feeds */
+  }
+
+  p {
+    @apply font-normal text-muji-text-muted leading-relaxed tracking-normal text-sm;
+  }
+
+  p strong {
+    @apply font-semibold text-muji-text;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-muji-text;
+  }
+}
+
+/* Instagram style custom layout classes */
+.muji-card {
+  @apply bg-muji-beige border border-muji-border rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-stone-200/50 hover:border-muji-sand;
+}
+
+.muji-button-primary {
+  @apply bg-muji-sand text-white px-8 py-3 rounded-lg hover:opacity-90 hover:scale-[1.01] transition-all duration-300 font-semibold text-xs tracking-wider active:scale-95;
+}
+
+.muji-button-secondary {
+  @apply bg-muji-beige text-muji-text border border-muji-border px-8 py-3 rounded-lg hover:bg-stone-50 hover:border-stone-400 hover:text-muji-text transition-all duration-300 font-semibold text-xs tracking-wider active:scale-95;
+}
+
+.muji-input {
+  @apply bg-white border border-muji-border px-4 py-2.5 text-sm text-muji-text focus:outline-none focus:border-muji-sand focus:ring-2 focus:ring-muji-sand/10 transition-all rounded-lg placeholder:text-stone-400 font-normal;
+}
+
+/* Instagram story active circular boundary visual style */
+.instagram-story-ring {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  padding: 3px;
+  border-radius: 9999px;
+  display: inline-block;
+}
+
+.instagram-gradient-text {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.instagram-gradient-bg {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.section-padding {
+  @apply py-16 md:py-24;
+}
+
+.container-custom {
+  @apply max-w-7xl mx-auto px-6 md:px-12;
+}
+
+@layer utilities {
+  .bg-white {
+    background-color: var(--color-muji-beige) !important;
+  }
+  .bg-muji-white {
+    background-color: var(--color-muji-white) !important;
+  }
+  .bg-muji-beige {
+    background-color: var(--color-muji-beige) !important;
+  }
+  .bg-muji-sand {
+    background-color: var(--color-muji-sand) !important;
+  }
+  .text-stone-900 {
+    color: var(--color-muji-text) !important;
+  }
+  .text-gray-900 {
+    color: var(--color-muji-text) !important;
+  }
+  .text-slate-900 {
+    color: var(--color-muji-text) !important;
+  }
+  .border-muji-border {
+    border-color: var(--color-muji-border) !important;
+  }
+  .divide-muji-border > :not([hidden]) ~ :not([hidden]) {
+    border-color: var(--color-muji-border) !important;
+  }
+}

@@ -1,0 +1,96 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email.matches('(?i)^shyanyeews@gmail\\.com$')
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isValidSearchQuery(data) {
+      return data.query is string && data.query.size() <= 100 &&
+             data.count is int && data.count >= 1 && data.count <= 1000000 &&
+             data.lastSearched is timestamp;
+    }
+
+    // Projects collection
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // BlogPosts collection
+    match /blogPosts/{postId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Areas collection
+    match /areas/{areaId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Search queries collection
+    match /search_queries/{queryId} {
+      allow read: if true;
+      allow create: if queryId is string && queryId.size() <= 100 && 
+                     isValidSearchQuery(request.resource.data) && 
+                     request.resource.data.count == 1 &&
+                     request.resource.data.lastSearched == request.time;
+      allow update: if isValidSearchQuery(request.resource.data) &&
+                     request.resource.data.query == resource.data.query &&
+                     request.resource.data.count == resource.data.count + 1 &&
+                     request.resource.data.lastSearched == request.time;
+      allow delete: if isAdmin();
+    }
+
+    // Settings collection
+    function isValidSetting(data) {
+      return (!data.keys().hasAny(['googleSiteVerification']) || data.googleSiteVerification is string) &&
+             (!data.keys().hasAny(['metaTitleSuffix']) || data.metaTitleSuffix is string) &&
+             (!data.keys().hasAny(['metaDescription']) || data.metaDescription is string) &&
+             (!data.keys().hasAny(['metaKeywords']) || data.metaKeywords is string) &&
+             (!data.keys().hasAny(['web3formsAccessKey']) || data.web3formsAccessKey is string);
+    }
+
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin() && (request.resource == null || isValidSetting(request.resource.data));
+    }
+
+    // Contact Inquiries collection
+    function isValidInquiry(data) {
+      return data.name is string && data.name.size() <= 120 &&
+             data.email is string && data.email.size() <= 120 &&
+             data.phone is string && data.phone.size() <= 40 &&
+             data.inquiryType is string && data.inquiryType.size() <= 120 &&
+             data.message is string && data.message.size() <= 8000 &&
+             data.createdAt != null;
+    }
+
+    match /contact_inquiries/{inquiryId} {
+      allow read, update, delete: if isAdmin();
+      allow create: if isValidInquiry(request.resource.data) && (request.resource.data.createdAt == request.time || request.resource.data.createdAt is timestamp);
+    }
+
+    // Test connection
+    match /test/connection {
+      allow read: if true;
+    }
+  }
+}

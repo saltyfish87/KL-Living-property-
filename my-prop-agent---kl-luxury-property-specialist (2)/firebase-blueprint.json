@@ -1,0 +1,131 @@
+{
+  "entities": {
+    "project": {
+      "title": "Project",
+      "description": "Real estate project details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "slug": { "type": "string" },
+        "area": { "type": "string" },
+        "developer": { "type": "string" },
+        "tenure": { "type": "string" },
+        "propertyType": { "type": "string" },
+        "completionYear": { "type": "string" },
+        "minPrice": { "type": "number" },
+        "sizeSqft": { "type": "string" },
+        "rooms": { "type": "string" },
+        "tagline": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "gallery": { "type": "array" },
+        "status": { "type": "string" },
+        "keyFeatures": { "type": "array" },
+        "locationAdvantage": { "type": "array" },
+        "investmentHighlights": { "type": "array" },
+        "nearbyAmenities": { "type": "array" },
+        "droneViewUrl": { "type": "string" },
+        "virtualTourUrl": { "type": "string" },
+        "featured": { "type": "boolean" },
+        "fullDescription": { "type": "string" }
+      },
+      "required": ["id", "name", "slug", "area"]
+    },
+    "blogPost": {
+      "title": "Blog Post",
+      "description": "Article or guide for property buyers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "slug": { "type": "string" },
+        "excerpt": { "type": "string" },
+        "content": { "type": "string" },
+        "date": { "type": "string" },
+        "author": { "type": "string" },
+        "category": { "type": "string" },
+        "thumbnail": { "type": "string" }
+      },
+      "required": ["id", "title", "slug"]
+    },
+    "area": {
+      "title": "Area",
+      "description": "Property investment area details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "slug": { "type": "string" },
+        "description": { "type": "string" },
+        "whyInvest": { "type": "array" },
+        "priceTrend": { "type": "string" },
+        "rentalDemand": { "type": "string" },
+        "recommendedProjectIds": { "type": "array" }
+      },
+      "required": ["id", "name", "slug"]
+    },
+    "searchQuery": {
+      "title": "Search Query",
+      "description": "Tracked user search query data for insights",
+      "type": "object",
+      "properties": {
+        "query": { "type": "string" },
+        "count": { "type": "number" },
+        "lastSearched": { "type": "string", "format": "date-time" }
+      },
+      "required": ["query", "count", "lastSearched"]
+    },
+    "setting": {
+      "title": "Setting",
+      "description": "Dynamic layout, metadata, SEO configuration settings",
+      "type": "object",
+      "properties": {
+        "googleSiteVerification": { "type": "string" },
+        "metaTitleSuffix": { "type": "string" },
+        "metaDescription": { "type": "string" },
+        "metaKeywords": { "type": "string" },
+        "web3formsAccessKey": { "type": "string" }
+      }
+    },
+    "contactInquiry": {
+      "title": "Contact Inquiry",
+      "description": "User submitted contact inquiries",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "inquiryType": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "phone", "inquiryType", "message", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/projects/{projectId}": {
+      "schema": "project",
+      "description": "Collection of real estate projects"
+    },
+    "/blogPosts/{postId}": {
+      "schema": "blogPost",
+      "description": "Collection of blog posts and guides"
+    },
+    "/areas/{areaId}": {
+      "schema": "area",
+      "description": "Collection of property investment areas"
+    },
+    "/search_queries/{queryId}": {
+      "schema": "searchQuery",
+      "description": "Logged search queries from user activity"
+    },
+    "/settings/{settingId}": {
+      "schema": "setting",
+      "description": "Configuration and SEO-related key-value settings"
+    },
+    "/contact_inquiries/{inquiryId}": {
+      "schema": "contactInquiry",
+      "description": "Collection of incoming contact form leads and inquirer requests"
+    }
+  }
+}
