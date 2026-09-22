@@ -125,7 +125,7 @@ export const SEO: React.FC<SEOProps> = ({
             "MM2H (Malaysia My Second Home) Property Guidelines",
             "Expatriate Home Mortgage Loans",
             "Stamp Duty MOT Exemptions under i-Miliki",
-            "Bukit Jalil, Petaling Jaya, Subang Jaya and KLCC investment hot-zones"
+            "Bukit Jalil, Petaling Jaya, Subang Jaya and KL City Centre investment hot-zones"
           ],
           "areaServed": [
             {

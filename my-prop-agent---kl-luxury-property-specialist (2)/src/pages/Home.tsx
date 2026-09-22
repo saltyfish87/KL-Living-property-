@@ -132,12 +132,12 @@ export const Home: React.FC = () => {
         }}
       />
 
-      {/* Stunning KLCC Banner Hero with premium eager-loaded background and high-performance night city fallback */}
+      {/* Stunning KL City Centre Banner Hero with premium eager-loaded background and high-performance night city fallback */}
       <section className="relative min-h-[90vh] lg:min-h-screen flex flex-col justify-center section-padding overflow-hidden select-none bg-neutral-950">
-        {/* Background KLCC image optimized with eager loading, aligned right to show towers clearly */}
+        {/* Background KL City Centre image optimized with eager loading, aligned right to show towers clearly */}
         <img 
           src="https://lh3.googleusercontent.com/d/1Y0LHC2jEyfqVOlmNRPXZJVSeH4s4S0YC" 
-          alt="Kuala Lumpur Skyline and KLCC Twin Towers at Night"
+          alt="Kuala Lumpur Skyline and Petronas Twin Towers at Night"
           loading="eager"
           className="absolute inset-0 w-full h-full object-cover z-10 pointer-events-none object-center md:object-[68%_center] animate-fade-in"
           referrerPolicy="no-referrer"
